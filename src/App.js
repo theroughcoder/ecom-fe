@@ -190,7 +190,7 @@ function App() {
           <Container className="mt-4">
             <Routes>
               <Route path="/" element={<HomeScreen />} />;
-              <Route path="/product/:slug" element={<ProductScreen />} />;
+              <Route path="/product/:id" element={<ProductScreen />} />;
               <Route path="/admin/product/:productId" element={<ProductEditScreen/>} />;
               <Route path="/order/:id" element={<ProtectedRoute><OrderScreen/></ProtectedRoute>} />;
               <Route path="/signin" element={<SigninScreen />} />;

@@ -19,7 +19,7 @@ import { Store } from "../Store"
 
 function ProductScreen(){
   const navigate = useNavigate();
-    const {slug} = useParams();
+    const {id} = useParams();
     const reducer = (state, action) => {
         switch (action.type) {
           case "FETCH_REQUEST":
@@ -42,29 +42,29 @@ function ProductScreen(){
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products/slug/${slug}`);
+        const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products/${id}`);
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
       }
     };
     fetchData();
-  }, [slug]);
+  }, [id]);
 
   const {state, dispatch : ctxDispatch} = useContext(Store);
   const{cart} = state;
   
 const addToCartHandler = async() => {
-  const  existItem = cart.cartItems.find((x)=> x._id === product._id);
+  const  existItem = cart.cartItems.find((x)=> x.id === product.id);
   const quantity = existItem? existItem.quantity+1 : 1;
-  const {data} = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products/${product._id}`);
+  const {data} = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products/${product.id}`);
 
   if(data.countInStock < quantity) {
     window.alert('Sorry. Product is out of stock');
     return
   }
 
-  ctxDispatch({type: 'CART_ADD_ITEM', payload: {...product, quantity: quantity}})
+  ctxDispatch({type: 'CART_ADD_ITEM', payload: {...product, quantity}})
   navigate('/cart');
 }
 

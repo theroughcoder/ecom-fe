@@ -32,11 +32,11 @@ function Product(prop) {
   };
   return (
     <Card className="product-card">
-      <Link to={`/product/${product.slug}`} style={{ overflow: 'hidden', display: 'block' }}>
+      <Link to={`/product/${product.id}`} style={{ overflow: 'hidden', display: 'block' }}>
         <img src={product.image} alt={product.name} className="card-img-top homeScreen-card-img" />
       </Link>
       <Card.Body className="d-flex flex-column gap-2 p-3">
-        <Link to={`/product/${product.slug}`} style={{ color: 'inherit' }}>
+        <Link to={`/product/${product.id}`} style={{ color: 'inherit' }}>
           <div className="homescreen-card-title">{product.name}</div>
         </Link>
         <Rating rating={product.rating} reviews={product.numReviews} />
