@@ -31,23 +31,24 @@ function Product(prop) {
     navigate("/cart");
   };
   return (
-    <Card >
-      <Link to={`/product/${product.slug}`}>
-        <img src={product.image} className="card-img-top homeScreen-card-img" />
+    <Card className="product-card">
+      <Link to={`/product/${product.slug}`} style={{ overflow: 'hidden', display: 'block' }}>
+        <img src={product.image} alt={product.name} className="card-img-top homeScreen-card-img" />
       </Link>
-      <Card.Body>
-        <Link to={`/product/${product.slug}`}>
-          <Card.Title><div className="homescreen-card-title">{product.name}</div></Card.Title>
+      <Card.Body className="d-flex flex-column gap-2 p-3">
+        <Link to={`/product/${product.slug}`} style={{ color: 'inherit' }}>
+          <div className="homescreen-card-title">{product.name}</div>
         </Link>
         <Rating rating={product.rating} reviews={product.numReviews} />
-        <Card.Text>
-          {" "}
-          <strong>&#x20B9; {product.price}</strong>
-        </Card.Text>
+        <div className="product-price mt-auto mb-2">&#x20B9; {product.price}</div>
         {product.countInStock === 0 ? (
-          <Button disabled variant ="light">Out of Stock</Button>
+          <Button disabled variant="secondary" className="w-100" style={{ borderRadius: '8px' }}>
+            Out of Stock
+          </Button>
         ) : (
-          <Button variant="warning" onClick={addToCartHandler}>Add to cart</Button>
+          <Button className="btn-add-cart" onClick={addToCartHandler}>
+            Add to Cart
+          </Button>
         )}
       </Card.Body>
     </Card>

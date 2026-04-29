@@ -68,7 +68,7 @@ function App() {
       >
         <ToastContainer position="bottom-center" limit={1} />
         <header className="App-header">
-          <Navbar bg="dark" variant="dark" expand="lg">
+          <Navbar className="navbar-green" variant="dark" expand="lg">
             <Container>
             <Nav className="me-auto ">
 

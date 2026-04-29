@@ -51,7 +51,7 @@ function HomeScreen() {
 
   return (
     <>
-      <p className="featured">Featured Product</p>
+      <p className="featured">Featured Products</p>
 
       <div className="container">
         {loading ? (
