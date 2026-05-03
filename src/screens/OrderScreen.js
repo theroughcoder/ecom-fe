@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { useEffect } from "react";
 import {  useReducer } from "react";
 import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
@@ -56,7 +56,7 @@ export default function OrderScreen() {
     const fetchData = async () => {
       dispatch({ type: 'FETCH_REQUEST' });
       try {
-        const {data} = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/orders/${id}`, {
+        const {data} = await axios.get(`${process.env.REACT_APP_PRODUCT_URL}/api/orders/${id}`, {
           headers: {authorization: `Bearer ${userInfo.token}`} 
         });
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
@@ -80,7 +80,7 @@ export default function OrderScreen() {
     try {
       dispatch({ type: 'DELIVER_REQUEST' });
       const { data } = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/api/orders/${order._id}/deliver`,
+        `${process.env.REACT_APP_PRODUCT_URL}/api/orders/${order._id}/deliver`,
         {},
         {
           headers: { authorization: `Bearer ${userInfo.token}` },
@@ -167,19 +167,19 @@ export default function OrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>₹{order.itemsPrice.toFixed(2)}</Col>
+                    <Col>â‚¹{order.itemsPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Shipping</Col>
-                    <Col>₹{order.shippingPrice.toFixed(2)}</Col>
+                    <Col>â‚¹{order.shippingPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Tax</Col>
-                    <Col>₹{order.tax.toFixed(2)}</Col>
+                    <Col>â‚¹{order.tax.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -187,7 +187,7 @@ export default function OrderScreen() {
                     <Col>
                       <strong>Order Total</strong>
                     </Col>
-                    <Col>₹{order.totalPrice.toFixed(2)}</Col>
+                    <Col>â‚¹{order.totalPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 {userInfo.isAdmin && order.isPaid && !order.isDelivered && (

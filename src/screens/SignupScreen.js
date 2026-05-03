@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+﻿import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import { Helmet } from "react-helmet-async";
@@ -29,7 +29,7 @@ export default function SigninScreen(){
     const submitHandler = async (e)=>{
         e.preventDefault();
         try{
-            const {data} = await Axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/users/signup`, {
+            const {data} = await Axios.post(`${process.env.REACT_APP_PRODUCT_URL}/api/users/signup`, {
                 name,
                 email,
                 password,

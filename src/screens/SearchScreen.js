@@ -41,19 +41,25 @@ export default function SearchScreen() {
     const order = sp.get('order') || 'newest';
     const page = sp.get('page') || 1;
 
-    const [{loading, error, products, pages, countProducts}, dispatch] = 
+    const [{loading, error, products, pages, countProducts}, dispatch] =
     useReducer(reducer, {
         loading: true,
         error: '',
-
+        products: [],
+        pages: 0,
+        countProducts: 0,
     });
+
+    console.log({
+      products
+    })
 
     useEffect(()=>{
         const fetchData = async () => {
             try{
                 dispatch({type: "FETCH_REQUEST"});
                 const {data} = await axios.get(
-                    `${process.env.REACT_APP_BACKEND_URL}/api/products/search?page=${page}&query=${query}&category=${category}&price=${price}&order=${order}&rating=${rating}`
+                    `${process.env.REACT_APP_PRODUCT_URL}/api/search?page=${page}&query=${query}&category=${category}&price=${price}&order=${order}&rating=${rating}`
                 )
                 dispatch({type: "FETCH_SUCCESS", payload: data});
 
@@ -73,7 +79,7 @@ export default function SearchScreen() {
     useEffect(() => {
       const fetchCategories = async () => {
         try {
-          const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products/categories`);
+          const { data } = await axios.get(`${process.env.REACT_APP_PRODUCT_URL}/api/products/categories`);
           setCategories(data);
         } catch (err) {
           Toast.error(getError(err));
@@ -249,12 +255,12 @@ const prices = [
                   </select>
                 </Col>
               </Row>
-              {products.length === 0 && (
+              {products?.length === 0 && (
                 <MessageBox>No Product Found</MessageBox>
               )}
 
               <Row>
-                {products.map((product) => (
+                {products?.map((product) => (
                   <Col sm={6} lg={4} className="mb-3" key={product._id}>
                     <Product product={product}></Product>
                   </Col>

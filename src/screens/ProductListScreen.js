@@ -1,4 +1,4 @@
-import axios from "axios";
+﻿import axios from "axios";
 import React, { useContext, useEffect, useReducer } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
@@ -66,7 +66,7 @@ export default function ProductListScreen() {
     const fetchData = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
-        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products/admin?page=${page}`, {
+        const { data } = await axios.get(`${process.env.REACT_APP_PRODUCT_URL}/api/products/admin?page=${page}`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: "FETCH_SUCCESS", payload: data });
@@ -87,7 +87,7 @@ export default function ProductListScreen() {
     if(window.confirm('Are you sure to create?')){
         try{
             dispatch({type: 'CREATE_REQUEST'});
-            const {data} = await axios.post(  `${process.env.REACT_APP_BACKEND_URL}/api/products`,
+            const {data} = await axios.post(  `${process.env.REACT_APP_PRODUCT_URL}/api/products`,
              {},
              {headers : {Authorization: `Bearer ${userInfo.token}`}})
             toast.success('product created successfully');
@@ -106,7 +106,7 @@ export default function ProductListScreen() {
       if(window.confirm('Are you sure to delete?')){
           dispatch({type: 'DELETE_REQUEST'});
           try{
-              await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/products/${product._id}`, {
+              await axios.delete(`${process.env.REACT_APP_PRODUCT_URL}/api/products/${product._id}`, {
                   headers: { Authorization: `Bearer ${userInfo.token}` }
               })
               toast.success('Product deleted successfully');

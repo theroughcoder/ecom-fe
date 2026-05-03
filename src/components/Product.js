@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+﻿import { Link, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Rating from "./Rating";
@@ -17,7 +17,7 @@ function Product(prop) {
   const addToCartHandler = async () => {
     const existItem = cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products/${product._id}`);
+    const { data } = await axios.get(`${process.env.REACT_APP_PRODUCT_URL}/api/products/${product._id}`);
 
     if (data.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");

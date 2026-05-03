@@ -1,4 +1,4 @@
-import { useContext } from "react";
+﻿import { useContext } from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -20,7 +20,7 @@ function CartScreen() {
   } = state;
 
   const updateCartHandler = async (item, quantity) => {
-    const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products/${item._id}`);
+    const { data } = await axios.get(`${process.env.REACT_APP_PRODUCT_URL}/api/products/${item._id}`);
 
     if (data.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");

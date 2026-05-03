@@ -1,4 +1,4 @@
-import  axios  from 'axios'
+﻿import  axios  from 'axios'
 import React from 'react'
 import { useContext } from 'react'
 import { useEffect } from 'react'
@@ -26,7 +26,7 @@ const [confirmPassword, setConfirmPassword] = useState();
 const submitHandler = async (e)=>{
     e.preventDefault();
     try{
-        const {data} = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/users/profileupdate`, {
+        const {data} = await axios.put(`${process.env.REACT_APP_PRODUCT_URL}/api/users/profileupdate`, {
             name,
             email,
             password,

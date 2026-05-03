@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+﻿import { useEffect, useReducer, useState } from "react";
 import logger from "use-reducer-logger";
 // import data from '../data'
 import axios from "axios";
@@ -36,7 +36,7 @@ function HomeScreen() {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
       try {
-        const result = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products`);
+        const result = await axios.get(`${process.env.REACT_APP_PRODUCT_URL}/api/products`);
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });

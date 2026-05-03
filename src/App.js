@@ -1,4 +1,4 @@
-// import logo from './logo.svg';
+﻿// import logo from './logo.svg';
 import "./App.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -49,7 +49,7 @@ function App() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/products/categories`);
+        const { data } = await axios.get(`${process.env.REACT_APP_PRODUCT_URL}/api/products/categories`);
         setCategories(data);
       } catch (err) {
         toast.error(getError(err));

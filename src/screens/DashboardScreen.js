@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+﻿import React, { useContext, useEffect, useReducer } from 'react';
 import Chart from 'react-google-charts';
 import axios from 'axios';
 import { Store } from '../Store';
@@ -36,7 +36,7 @@ export default function DashboardScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/orders/summary`, {
+        const { data } = await axios.get(`${process.env.REACT_APP_PRODUCT_URL}/api/orders/summary`, {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: 'FETCH_SUCCESS', payload: data });

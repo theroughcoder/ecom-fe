@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 import { useEffect } from "react";
 import { useContext, useReducer } from "react";
 import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
@@ -46,7 +46,7 @@ export default function PlaceOrderScreen() {
     try {
       dispatch({ type: "CREATE_REQUEST" });
       const { data } = await Axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/orders`,
+        `${process.env.REACT_APP_PRODUCT_URL}/api/orders`,
         {
           orderItems: cart.cartItems,
           shippingAddress: cart.shippingAddress,
@@ -143,19 +143,19 @@ export default function PlaceOrderScreen() {
                 <ListGroup.Item>
                   <Row>
                     <Col>Items</Col>
-                    <Col>₹{cart.itemsPrice.toFixed(2)}</Col>
+                    <Col>â‚¹{cart.itemsPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Shipping</Col>
-                    <Col>₹{cart.shippingPrice.toFixed(2)}</Col>
+                    <Col>â‚¹{cart.shippingPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <Row>
                     <Col>Tax</Col>
-                    <Col>₹{cart.tax.toFixed(2)}</Col>
+                    <Col>â‚¹{cart.tax.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -163,7 +163,7 @@ export default function PlaceOrderScreen() {
                     <Col>
                       <strong>Order Total</strong>
                     </Col>
-                    <Col>₹{cart.totalPrice.toFixed(2)}</Col>
+                    <Col>â‚¹{cart.totalPrice.toFixed(2)}</Col>
                   </Row>
                 </ListGroup.Item>
                 <ListGroup.Item>
