@@ -26,7 +26,8 @@ const [confirmPassword, setConfirmPassword] = useState();
 const submitHandler = async (e)=>{
     e.preventDefault();
     try{
-        const {data} = await axios.put(`${process.env.REACT_APP_PRODUCT_URL}/api/users/profileupdate`, {
+        const {data} = await axios.put(`${process.env.REACT_APP_USER_URL}/api/users/profileupdate`, {
+            id: user.id,
             name,
             email,
             password,

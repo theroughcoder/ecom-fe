@@ -27,7 +27,7 @@ export default function SigninScreen(){
     const submitHandler = async (e)=>{
         e.preventDefault();
         try{
-            const {data} = await Axios.post(`${process.env.REACT_APP_PRODUCT_URL}/api/users/signin`, {
+            const {data} = await Axios.post(`${process.env.REACT_APP_USER_URL}/api/users/signin`, {
                 email,
                 password
             });
