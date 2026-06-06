@@ -84,13 +84,13 @@ export default function OrderHistoryScreen() {
             <tbody>
               {orders.map((x) =>(
                   
-              <tr key={x._id}>
-                <td>{x._id}</td>
+              <tr key={x.id}>
+                <td>{x.id}</td>
                 <td>{x.createdAt.substring(0, 10)}</td>
                 <td>{x.totalPrice.toFixed(2)}</td>
                 <td>{(x.isPaid)? x.paidAt.substring(0, 10) : 'No'}</td>
                 <td>{x.isDelivered ? x.deliveredAt.substring(0, 10) : 'No'}</td>
-                <td><Button type = 'button' variant="light" onClick = {()=>{ navigate(`/order/${x._id}`)}}>Details</Button></td>
+                <td><Button type = 'button' variant="light" onClick = {()=>{ navigate(`/order/${x.id}`)}}>Details</Button></td>
               </tr>
               ))
                   

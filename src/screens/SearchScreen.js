@@ -261,7 +261,7 @@ const prices = [
 
               <Row>
                 {products?.map((product) => (
-                  <Col sm={6} lg={4} className="mb-3" key={product._id}>
+                  <Col sm={6} lg={4} className="mb-3" key={product.id}>
                     <Product product={product}></Product>
                   </Col>
                 ))}

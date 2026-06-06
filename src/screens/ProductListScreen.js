@@ -93,7 +93,7 @@ export default function ProductListScreen() {
             toast.success('product created successfully');
             dispatch({type : 'CREATE_SUCCESS'});
 
-            navigate(`/admin/product/${data.product._id}`)
+            navigate(`/admin/product/${data.product.id}`)
 
         } catch(err){
             toast.error(getError(error));
@@ -106,7 +106,7 @@ export default function ProductListScreen() {
       if(window.confirm('Are you sure to delete?')){
           dispatch({type: 'DELETE_REQUEST'});
           try{
-              await axios.delete(`${process.env.REACT_APP_PRODUCT_URL}/api/products/${product._id}`, {
+              await axios.delete(`${process.env.REACT_APP_PRODUCT_URL}/api/products/${product.id}`, {
                   headers: { Authorization: `Bearer ${userInfo.token}` }
               })
               toast.success('Product deleted successfully');
@@ -153,8 +153,8 @@ export default function ProductListScreen() {
             </thead>
             <tbody>
               {products.map((product) => (
-                <tr key={product._id}>
-                  <td>{product._id}</td>
+                <tr key={product.id}>
+                  <td>{product.id}</td>
                   <td>{product.name}</td>
                   <td>{product.price}</td>
                   <td>{product.category}</td>
@@ -163,7 +163,7 @@ export default function ProductListScreen() {
                     <Button
                       type="button"
                       variant="light"
-                      onClick={() => navigate(`/admin/product/${product._id}`)}
+                      onClick={() => navigate(`/admin/product/${product.id}`)}
                     >
                       Edit
                     </Button>

@@ -20,7 +20,7 @@ function CartScreen() {
   } = state;
 
   const updateCartHandler = async (item, quantity) => {
-    const { data } = await axios.get(`${process.env.REACT_APP_PRODUCT_URL}/api/products/${item._id}`);
+    const { data } = await axios.get(`${process.env.REACT_APP_PRODUCT_URL}/api/products/${item.id}`);
 
     if (data.countInStock < quantity) {
       window.alert("Sorry. Product is out of stock");
@@ -46,7 +46,7 @@ function CartScreen() {
             {cartItems.length > 0 ? (
               cartItems.map((item) => {
                 return (
-                  <ListGroup.Item key={item._id} className="mb-2">
+                  <ListGroup.Item key={item.id} className="mb-2">
                     <Row className="align-items-center">
                       <Col lg={2} md={2}  xs={4}>
                         <img

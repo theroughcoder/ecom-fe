@@ -72,7 +72,7 @@ export default function OrderListScreen() {
 const deleteHandler = async(order) => {
     dispatch({type : 'DELETE_REQUEST'})
     try{
-        const {data} = await axios.delete(`${process.env.REACT_APP_PRODUCT_URL}/api/orders/${order._id}`, {headers: { Authorization: `Bearer ${userInfo.token}`}})
+        const {data} = await axios.delete(`${process.env.REACT_APP_PRODUCT_URL}/api/orders/${order.id}`, {headers: { Authorization: `Bearer ${userInfo.token}`}})
         toast.success('order deleted');
         dispatch({type: 'DELETE_SUCCESS'})
     }catch(err){
@@ -108,8 +108,8 @@ const deleteHandler = async(order) => {
           </thead>
           <tbody>
             {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
+              <tr key={order.id}>
+                <td>{order.id}</td>
                 <td>{order.user ? order.user.name : 'DELETED USER'}</td>
                 <td>{order.createdAt.substring(0, 10)}</td>
                 <td>{order.totalPrice.toFixed(2)}</td>
@@ -125,7 +125,7 @@ const deleteHandler = async(order) => {
                     type="button"
                     variant="light"
                     onClick={() => {
-                      navigate(`/order/${order._id}`);
+                      navigate(`/order/${order.id}`);
                     }}
                   >
                     Details

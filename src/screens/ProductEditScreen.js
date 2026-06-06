@@ -98,7 +98,7 @@ export default function ProductEditScreen() {
       await axios.put(
         `${process.env.REACT_APP_PRODUCT_URL}/api/products/${productId}`,
         {
-          _id: productId,
+          id: productId,
           name,
           slug,
           price,

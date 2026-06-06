@@ -80,7 +80,7 @@ export default function OrderScreen() {
     try {
       dispatch({ type: 'DELIVER_REQUEST' });
       const { data } = await axios.put(
-        `${process.env.REACT_APP_PRODUCT_URL}/api/orders/${order._id}/deliver`,
+        `${process.env.REACT_APP_PRODUCT_URL}/api/orders/${order.id}/deliver`,
         {},
         {
           headers: { authorization: `Bearer ${userInfo.token}` },
@@ -140,7 +140,7 @@ export default function OrderScreen() {
               <Card.Title>Items</Card.Title>
               <ListGroup variant="flush">
                 {order.orderItems.map((item) => (
-                  <ListGroup.Item key={item._id}>
+                  <ListGroup.Item key={item.id}>
                     <Row className="align-items-center">
                       <Col md={6}>
                         <img

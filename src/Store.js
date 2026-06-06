@@ -27,11 +27,11 @@ function reducer(state, action) {
     case "CART_ADD_ITEM":
       const newItem = action.payload;
       const existItem = state.cart.cartItems.find(
-        (item) => item._id === newItem._id
+        (item) => item.id === newItem.id
       );
       const cartItems = existItem
         ? state.cart.cartItems.map((item) =>
-            item._id === existItem._id ? newItem : item
+            item.id === existItem.id ? newItem : item
           )
         : [...state.cart.cartItems, newItem];
 
@@ -40,7 +40,7 @@ function reducer(state, action) {
 
     case "CART_REMOVE_ITEM": {
       const cartItems = state.cart.cartItems.filter(
-        (item) => item._id !== action.payload._id
+        (item) => item.id !== action.payload.id
       );
 
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
