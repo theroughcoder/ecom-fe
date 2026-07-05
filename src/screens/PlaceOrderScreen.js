@@ -46,7 +46,7 @@ export default function PlaceOrderScreen() {
     try {
       dispatch({ type: "CREATE_REQUEST" });
       const { data } = await Axios.post(
-        `${process.env.REACT_APP_PRODUCT_URL}/api/orders`,
+        `${process.env.REACT_APP_ORDER_URL}/api/orders`,
         {
           orderItems: cart.cartItems,
           shippingAddress: cart.shippingAddress,
@@ -64,7 +64,7 @@ export default function PlaceOrderScreen() {
       );
       ctxDispatch({type: 'CART_CLEAR'});
       dispatch({type: 'CREATE_SUCCESS'})
-      navigate(`/order/${data.order.id}`)
+      navigate(`/order/${data.id}`)
     } catch (err) {
       dispatch({type: 'CREATE_FAIL'});
       toast.error(getError(err));

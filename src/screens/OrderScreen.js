@@ -10,6 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useParams} from "react-router-dom";
 import axios from "axios";
 import MessageBox from "../components/MessageBox";
+import PaymentForm from "../components/PaymentForm";
 import { Store } from "../Store";
 import { useContext } from "react";
 import { toast } from "react-toastify";
@@ -52,19 +53,20 @@ export default function OrderScreen() {
     loading: true,
     error: "",
   });
-  useEffect( () => {
-    const fetchData = async () => {
-      dispatch({ type: 'FETCH_REQUEST' });
-      try {
-        const {data} = await axios.get(`${process.env.REACT_APP_PRODUCT_URL}/api/orders/${id}`, {
-          headers: {authorization: `Bearer ${userInfo.token}`} 
-        });
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
-      } catch (err) {
-        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
-      }
-    };
 
+  const fetchData = async () => {
+    dispatch({ type: 'FETCH_REQUEST' });
+    try {
+      const {data} = await axios.get(`${process.env.REACT_APP_ORDER_URL}/api/orders/${id}`, {
+        headers: {authorization: `Bearer ${userInfo.token}`}
+      });
+      dispatch({ type: 'FETCH_SUCCESS', payload: data });
+    } catch (err) {
+      dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+    }
+  };
+
+  useEffect( () => {
     if(!userInfo){
       return navigate('/signin')
     }else{
@@ -131,8 +133,17 @@ export default function OrderScreen() {
                 <strong>Method:</strong>
                 {order.paymentMethod} <br />
               </Card.Text>
-              {order.isPaid? <MessageBox variant="success">Paid</MessageBox>: 
-              <MessageBox variant="danger">Not Paid</MessageBox> }
+              {order.isPaid ? (
+                <MessageBox variant="success">Paid</MessageBox>
+              ) : order.paymentIntentId ? (
+                <PaymentForm
+                  paymentIntentId={order.paymentIntentId}
+                  clientSecret={order.clientSecret}
+                  onPaid={fetchData}
+                />
+              ) : (
+                <MessageBox variant="danger">Not Paid</MessageBox>
+              )}
             </Card.Body>
           </Card>
           <Card className="mb-3">
