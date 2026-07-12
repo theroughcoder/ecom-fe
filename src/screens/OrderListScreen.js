@@ -72,7 +72,7 @@ export default function OrderListScreen() {
 const deleteHandler = async(order) => {
     dispatch({type : 'DELETE_REQUEST'})
     try{
-        const {data} = await axios.delete(`${process.env.REACT_APP_PRODUCT_URL}/api/orders/${order.id}`, {headers: { Authorization: `Bearer ${userInfo.token}`}})
+        const {data} = await axios.delete(`${process.env.REACT_APP_ORDER_URL}/api/orders/${order.id}`, {headers: { Authorization: `Bearer ${userInfo.token}`}})
         toast.success('order deleted');
         dispatch({type: 'DELETE_SUCCESS'})
     }catch(err){

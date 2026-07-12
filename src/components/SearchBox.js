@@ -10,16 +10,18 @@ export default function SearchBox() {
         navigate( query? `/search/?query=${query}` : '/search')
     }
   return (
-    <Form className='d-flex me-auto' onSubmit={submitHandler}>
+    <Form className='blinkit-search-form d-flex me-auto' onSubmit={submitHandler}>
         <InputGroup>
             <FormControl type="text"
             name="q"
             id='q'
             onChange={(e)=>{setQuery(e.target.value)}}
-            placeholder="search products..."
+            placeholder="Search for products..."
             aria-label="Search Products">
             </FormControl>
-            <Button type='submit' variant="warning outline-primary">Search</Button>
+            <Button type='submit'>
+              <i className="fas fa-search" />
+            </Button>
         </InputGroup>
     </Form>
   )

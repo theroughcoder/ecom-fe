@@ -82,7 +82,7 @@ export default function OrderScreen() {
     try {
       dispatch({ type: 'DELIVER_REQUEST' });
       const { data } = await axios.put(
-        `${process.env.REACT_APP_PRODUCT_URL}/api/orders/${order.id}/deliver`,
+        `${process.env.REACT_APP_ORDER_URL}/api/orders/${order.id}/deliver`,
         {},
         {
           headers: { authorization: `Bearer ${userInfo.token}` },

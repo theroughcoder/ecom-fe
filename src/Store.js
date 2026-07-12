@@ -3,6 +3,11 @@ import { createContext } from "react";
 
 export const Store = createContext();
 
+function withIsAdmin(userInfo) {
+  if (!userInfo) return userInfo;
+  return { ...userInfo, isAdmin: userInfo.role === "ADMIN" };
+}
+
 const initialState = {
   cart: {
     cartItems: localStorage.getItem("cartItems")
@@ -16,9 +21,9 @@ const initialState = {
       : null,
        
   },
-  userInfo: 
+  userInfo:
      localStorage.getItem("userInfo")
-      ? JSON.parse(localStorage.getItem("userInfo"))
+      ? withIsAdmin(JSON.parse(localStorage.getItem("userInfo")))
       : null,
 
 };
@@ -47,9 +52,10 @@ function reducer(state, action) {
       return { ...state, cart: { ...state.cart, cartItems } };
     }
     case "USER_SIGNIN": {
-      localStorage.setItem('userInfo', JSON.stringify(action.payload))
-      
-      return { ...state, userInfo: action.payload };
+      const userInfo = withIsAdmin(action.payload);
+      localStorage.setItem('userInfo', JSON.stringify(userInfo))
+
+      return { ...state, userInfo };
     }
     case "CART_CLEAR": {
       localStorage.removeItem('cartItems');
@@ -57,14 +63,16 @@ function reducer(state, action) {
       return { ...state, cart:{...state.cart, cartItems: [] } };
     }
     case "USER_SIGNUP": {
-      localStorage.setItem('userInfo', JSON.stringify(action.payload))
-      
-      return { ...state, userInfo: action.payload };
+      const userInfo = withIsAdmin(action.payload);
+      localStorage.setItem('userInfo', JSON.stringify(userInfo))
+
+      return { ...state, userInfo };
     }
     case "USER_PROFILE_UPDATE": {
-      localStorage.setItem('userInfo', JSON.stringify(action.payload))
-      
-      return { ...state, userInfo: action.payload };
+      const userInfo = withIsAdmin(action.payload);
+      localStorage.setItem('userInfo', JSON.stringify(userInfo))
+
+      return { ...state, userInfo };
     }
     case "USER_SIGNOUT": {
       localStorage.removeItem('userInfo');

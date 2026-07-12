@@ -128,9 +128,10 @@ export default function ProductEditScreen() {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
     bodyFormData.append('file', file);
+    bodyFormData.append('category', category);
     try {
       dispatch({ type: 'UPLOAD_REQUEST' });
-      const { data } = await axios.post(`${process.env.REACT_APP_PRODUCT_URL}/api/upload`, bodyFormData, {
+      const { data } = await axios.post(`${process.env.REACT_APP_PRODUCT_URL}/api/v1/s3/upload-image`, bodyFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           authorization: `Bearer ${userInfo.token}`,
@@ -138,7 +139,7 @@ export default function ProductEditScreen() {
       });
       dispatch({ type: 'UPLOAD_SUCCESS' });
 
-        setImage(data.secure_url);
+        setImage(data.filePath);
      
       toast.success('Image uploaded successfully. click Update to apply it');
     } catch (err) {

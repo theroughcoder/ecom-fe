@@ -26,6 +26,7 @@ import ProfileScreen from "./screens/ProfileScreen";
 import { getError } from "./utils";
 import axios from "axios";
 import SearchBox from "./components/SearchBox";
+import NotificationBell from "./components/NotificationBell";
 import SearchScreen from "./screens/SearchScreen";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DashboardScreen from "./screens/DashboardScreen";
@@ -79,21 +80,24 @@ function App() {
                 <i className="fas fa-bars" />
               </Button>
               <LinkContainer to="/">
-                <Navbar.Brand>Bluesdare</Navbar.Brand>
+                <Navbar.Brand>
+                  <i className="fas fa-bolt brand-bolt" /> Bluesdare
+                </Navbar.Brand>
               </LinkContainer>
             </Nav>
             <Nav className="me-auto ">
               <SearchBox/>
             </Nav>
-              <Nav >
-                <Link to="/cart" className="nav-link">
-                  Cart
+              <Nav className="align-items-center gap-2">
+                <Link to="/cart" className="nav-link icon-pill-btn">
+                  <i className="fas fa-shopping-cart" /> Cart
                   {cart.cartItems.length > 0 && (
                     <Badge pill bg="danger">
                       {cart.cartItems.reduce((a, c) => a + c.quantity, 0)}
                     </Badge>
                   )}
                 </Link>
+                <NotificationBell />
                 {userInfo ? (
                   <NavDropdown title={userInfo.name} id="basic-nav-dropdown " align="end" >
                     <LinkContainer to="/profile">

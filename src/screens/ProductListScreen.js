@@ -1,11 +1,12 @@
-﻿import axios from "axios";
-import React, { useContext, useEffect, useReducer } from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
+import ProductFormModal from "../components/ProductFormModal";
 import { Store } from "../Store";
 import { getError } from "../utils";
 
@@ -24,43 +25,37 @@ const reducer = (state, action) => {
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
 
-     case "CREATE_REQUEST":
-         return {...state, loadingCreate : true, };
-          
-     case "CREATE_SUCCESS":
-         return {...state, loadingCreate : false}; 
-
-     case "CREATE_FAIL":
-         return {...state, loadingCreate : false}; 
-
      case "DELETE_REQUEST":
          return {...state, loadingDelete : true, };
-          
+
      case "DELETE_SUCCESS":
-         return {...state, loadingDelete : false , successfulDelete : true}; 
+         return {...state, loadingDelete : false , successfulDelete : true};
 
      case "DELETE_FAIL":
          return {...state, loadingDelete : false};
 
      case "DELETE_RESET":
-         return {...state, loadingDelete : false, successfulDelete: false};  
+         return {...state, loadingDelete : false, successfulDelete: false};
     default:
       return state;
   }
 };
 
 export default function ProductListScreen() {
-    const navigate = useNavigate();
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
   const page = sp.get("page") || 1;
 
-  const [{ loading, products, pages, error, loadingCreate, loadingDelete, successfulDelete }, dispatch] = useReducer(reducer, {
-    loading: true, 
+  const [{ loading, products, pages, error, loadingDelete, successfulDelete }, dispatch] = useReducer(reducer, {
+    loading: true,
     error: "",
   });
   const { state } = useContext(Store);
   const { userInfo } = state;
+
+  const [modalShow, setModalShow] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [reloadFlag, setReloadFlag] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,31 +71,26 @@ export default function ProductListScreen() {
           payload: getError(err),
         });
       }
-    }; 
+    };
     fetchData();
     if(successfulDelete){
     dispatch({type: 'DELETE_RESET'});
     }
-  }, [userInfo, page, successfulDelete]);
+  }, [userInfo, page, successfulDelete, reloadFlag]);
 
-  const createHandler = async()=>{
-    if(window.confirm('Are you sure to create?')){
-        try{
-            dispatch({type: 'CREATE_REQUEST'});
-            const {data} = await axios.post(  `${process.env.REACT_APP_PRODUCT_URL}/api/products`,
-             {},
-             {headers : {Authorization: `Bearer ${userInfo.token}`}})
-            toast.success('product created successfully');
-            dispatch({type : 'CREATE_SUCCESS'});
+  const openCreateModal = () => {
+    setSelectedProduct(null);
+    setModalShow(true);
+  };
 
-            navigate(`/admin/product/${data.product.id}`)
+  const openEditModal = (product) => {
+    setSelectedProduct(product);
+    setModalShow(true);
+  };
 
-        } catch(err){
-            toast.error(getError(error));
-            dispatch({type: 'CREATE_FAIL'});
-        }
-    }
-  }
+  const handleSaved = () => {
+    setReloadFlag((prev) => prev + 1);
+  };
 
   const deleteHandler = async(product) => {
       if(window.confirm('Are you sure to delete?')){
@@ -128,10 +118,9 @@ export default function ProductListScreen() {
           <h1 className="heading"> Product List</h1>
         </Col>
         <Col className="col text-end">
-          <Button type="button" onClick={createHandler}>Create Product</Button>
+          <Button type="button" onClick={openCreateModal}>Create Product</Button>
         </Col>
       </Row>
-    {loadingCreate && <LoadingBox></LoadingBox>}
     {loadingDelete && <LoadingBox></LoadingBox>}
       {loading ? (
         <LoadingBox></LoadingBox>
@@ -163,7 +152,7 @@ export default function ProductListScreen() {
                     <Button
                       type="button"
                       variant="light"
-                      onClick={() => navigate(`/admin/product/${product.id}`)}
+                      onClick={() => openEditModal(product)}
                     >
                       Edit
                     </Button>
@@ -192,7 +181,7 @@ export default function ProductListScreen() {
                 to={`/admin/products?page=${x + 1}`}
               >
                 <Button
-                  className={Number(page) === x + 1. ? "text-bold" : ""}
+                  className={Number(page) === x + 1 ? "text-bold" : ""}
                   variant="light"
                 >
                   {x + 1}
@@ -202,6 +191,13 @@ export default function ProductListScreen() {
           </div>
         </>
       )}
+
+      <ProductFormModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        product={selectedProduct}
+        onSaved={handleSaved}
+      />
     </div>
   );
 }

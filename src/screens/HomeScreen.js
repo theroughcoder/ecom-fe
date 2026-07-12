@@ -5,13 +5,26 @@ import axios from "axios";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { Link } from "react-router-dom";
 import Product from "../components/Product";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
 import { getError} from "../utils";
 
 function HomeScreen() {
-  
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get(`${process.env.REACT_APP_PRODUCT_URL}/api/products/categories`);
+        setCategories(data);
+      } catch (err) {
+        // categories are a nice-to-have on this screen; ignore failures silently
+      }
+    };
+    fetchCategories();
+  }, []);
 
   const reducer = (state, action) => {
     switch (action.type) {
@@ -51,6 +64,20 @@ function HomeScreen() {
 
   return (
     <>
+      {categories.length > 0 && (
+        <div className="category-rail">
+          {categories.map((category) => (
+            <Link
+              key={category}
+              to={`/search?category=${category}`}
+              className="category-chip"
+            >
+              {category}
+            </Link>
+          ))}
+        </div>
+      )}
+
       <p className="featured">Featured Products</p>
 
       <div className="container">

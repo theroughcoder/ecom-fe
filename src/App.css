@@ -1,27 +1,31 @@
 
 /* ========================
-   CSS CUSTOM PROPERTIES
+   CSS CUSTOM PROPERTIES — BLINKIT-STYLE THEME
 ======================== */
 :root {
-  --primary: #22c55e;
-  --primary-dark: #16a34a;
-  --primary-mid: #4ade80;
-  --primary-light: #86efac;
-  --primary-bg: #f0fdf4;
+  --yellow: #f8cd51;
+  --yellow-dark: #f0b90b;
+  --yellow-light: #fde8a8;
+
+  --primary: #0c831f;
+  --primary-dark: #0a6b1a;
+  --primary-mid: #16a34a;
+  --primary-light: #4ade80;
+  --primary-bg: #eefbf0;
   --primary-border: #bbf7d0;
-  --accent: #86efac;
+  --accent: #f8cd51;
 
   --white: #ffffff;
-  --surface: #f8fafc;
-  --text-primary: #0f172a;
-  --text-secondary: #64748b;
-  --text-muted: #94a3b8;
-  --border: #e2e8f0;
+  --surface: #f6f6f6;
+  --text-primary: #1c1c1c;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --border: #e5e7eb;
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08), 0 2px 4px rgba(0, 0, 0, 0.04);
   --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.06);
-  --shadow-green: 0 4px 14px rgba(22, 163, 74, 0.25);
+  --shadow-green: 0 4px 14px rgba(12, 131, 31, 0.25);
 
   --radius-sm: 8px;
   --radius: 12px;
@@ -56,39 +60,44 @@ main {
 }
 
 /* ========================
-   NAVBAR — GREEN GRADIENT
+   NAVBAR — BLINKIT YELLOW
 ======================== */
 .navbar-green {
-  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.75rem 0;
+  background: var(--yellow) !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding: 0.65rem 0;
 }
 
 .navbar-green .navbar-brand {
   font-weight: 800;
-  font-size: 1.35rem;
-  letter-spacing: -0.3px;
-  color: #ffffff !important;
+  font-size: 1.4rem;
+  letter-spacing: -0.4px;
+  color: #1c1c1c !important;
+}
+
+.navbar-green .navbar-brand .brand-bolt {
+  color: var(--primary);
 }
 
 .navbar-green .nav-link {
-  color: rgba(255, 255, 255, 0.88) !important;
-  font-weight: 500;
+  color: #1c1c1c !important;
+  font-weight: 600;
   transition: var(--transition);
 }
 
 .navbar-green .nav-link:hover {
-  color: #4ade80 !important;
+  color: var(--primary-dark) !important;
 }
 
 .navbar-green .btn-dark {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  background: rgba(0, 0, 0, 0.06) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  color: #1c1c1c !important;
   transition: var(--transition);
 }
 
 .navbar-green .btn-dark:hover {
-  background: rgba(255, 255, 255, 0.2) !important;
+  background: rgba(0, 0, 0, 0.12) !important;
 }
 
 .navbar-green .dropdown-menu {
@@ -104,6 +113,92 @@ main {
   color: var(--primary-dark);
 }
 
+/* Icon buttons (cart / notification) sitting on the yellow header */
+.icon-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 255, 255, 0.55);
+  color: #1c1c1c !important;
+  border-radius: 999px;
+  padding: 0.4rem 0.8rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  position: relative;
+  transition: var(--transition);
+}
+
+.icon-pill-btn:hover {
+  background: rgba(255, 255, 255, 0.85);
+  color: #1c1c1c !important;
+}
+
+.icon-pill-btn .badge {
+  position: relative;
+  top: -1px;
+}
+
+/* Search bar pill inside the header */
+.blinkit-search-form .input-group {
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.blinkit-search-form .form-control {
+  border: none;
+  padding: 0.55rem 1rem;
+  background: var(--white);
+}
+
+.blinkit-search-form .form-control:focus {
+  box-shadow: none;
+}
+
+.blinkit-search-form .btn {
+  border: none;
+  background: var(--primary);
+  color: var(--white);
+  padding: 0.55rem 1.1rem;
+  font-weight: 600;
+}
+
+.blinkit-search-form .btn:hover {
+  background: var(--primary-dark);
+}
+
+/* Category chip rail */
+.category-rail {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding: 0.25rem 0 1.25rem;
+  scrollbar-width: none;
+}
+
+.category-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.category-chip {
+  flex: 0 0 auto;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  transition: var(--transition);
+}
+
+.category-chip:hover {
+  border-color: var(--yellow-dark);
+  background: var(--yellow-light);
+  color: #1c1c1c;
+}
+
 /* ========================
    SIDEBAR
 ======================== */
@@ -113,7 +208,7 @@ main {
   position: fixed;
   top: 0;
   left: -260px;
-  background: linear-gradient(180deg, #16a34a 0%, #22c55e 60%, #4ade80 100%);
+  background: #1c1c1c;
   transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 200;
   box-shadow: var(--shadow-lg);
@@ -140,7 +235,7 @@ main {
 }
 
 .sidebar-link:hover {
-  color: #4ade80 !important;
+  color: var(--yellow) !important;
   padding-left: 4px;
 }
 
@@ -148,24 +243,13 @@ main {
    FEATURED / HOME HEADER
 ======================== */
 .featured {
-  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
   font-weight: 800;
-  text-align: center;
-  padding: 2rem 0 0.5rem;
-  color: var(--primary-dark);
+  text-align: left;
+  padding: 0 0 1rem;
+  color: var(--text-primary);
   position: relative;
-  letter-spacing: -0.5px;
-}
-
-
-.featured::after {
-  content: '';
-  display: block;
-  width: 56px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-dark), var(--primary), var(--accent));
-  border-radius: 2px;
-  margin: 0.6rem auto 1.5rem;
+  letter-spacing: -0.3px;
 }
 
 .shopping-cart {
@@ -173,7 +257,7 @@ main {
 }
 
 /* ========================
-   PRODUCT CARDS
+   PRODUCT CARDS — BLINKIT STYLE
 ======================== */
 .product-card {
   border: 1px solid var(--border) !important;
@@ -183,42 +267,110 @@ main {
   background: var(--white);
   box-shadow: var(--shadow-sm);
   height: 100%;
+  position: relative;
 }
 
 .product-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--primary-border) !important;
+  box-shadow: var(--shadow-md);
+  border-color: var(--yellow-dark) !important;
+}
+
+.homeScreen-card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+  background: var(--surface);
 }
 
 .homeScreen-card-img {
-  height: 240px;
+  display: block;
+  height: 180px;
   width: 100%;
   object-fit: cover;
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .product-card:hover .homeScreen-card-img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .homescreen-card-title {
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text-primary);
-  font-size: 0.92rem;
-  line-height: 1.45;
+  font-size: 0.88rem;
+  line-height: 1.4;
   height: auto;
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.2rem;
 }
 
 .product-price {
-  font-size: 1.15rem;
+  font-size: 1rem;
   font-weight: 700;
-  color: var(--primary-dark);
+  color: var(--text-primary);
+}
+
+/* Blinkit-style pill "ADD" button anchored to the image */
+.btn-add-pill {
+  position: absolute;
+  right: 0.6rem;
+  bottom: -0.9rem;
+  background: var(--white);
+  border: 1.5px solid var(--primary);
+  color: var(--primary) !important;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-radius: 8px;
+  padding: 0.4rem 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.btn-add-pill:hover {
+  background: var(--primary);
+  color: var(--white) !important;
+}
+
+.btn-add-pill:disabled {
+  background: var(--white);
+  border-color: var(--border);
+  color: var(--text-muted) !important;
+  opacity: 1;
+}
+
+/* ========================
+   NOTIFICATION DROPDOWN
+======================== */
+.notification-panel {
+  min-width: 320px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.notification-item {
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.notification-item:hover {
+  background: var(--yellow-light);
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-empty {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  color: var(--text-muted);
 }
 
 /* ========================
@@ -233,9 +385,9 @@ main {
    BUTTONS
 ======================== */
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  background: var(--primary);
   border: none;
-  color: #14532d;
+  color: var(--white);
   font-weight: 700;
   border-radius: var(--radius-sm);
   transition: var(--transition);
@@ -244,9 +396,9 @@ main {
 
 .btn-primary:hover,
 .btn-primary:focus {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+  background: var(--primary-dark);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.4);
+  box-shadow: 0 6px 18px rgba(12, 131, 31, 0.35);
   color: #ffffff;
   border: none;
 }
@@ -254,6 +406,12 @@ main {
 .btn-primary:active {
   transform: translateY(0);
   box-shadow: var(--shadow-green);
+}
+
+.btn-primary:disabled {
+  background: var(--text-muted);
+  border: none;
+  box-shadow: none;
 }
 
 .btn-success {
@@ -266,29 +424,6 @@ main {
 .btn-success:focus {
   background: var(--primary-mid) !important;
   border-color: var(--primary-mid) !important;
-}
-
-.btn-add-cart {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-  border: none;
-  color: #14532d !important;
-  font-weight: 600;
-  border-radius: var(--radius-sm);
-  transition: var(--transition);
-  width: 100%;
-  padding: 0.55rem 1rem;
-  box-shadow: var(--shadow-green);
-}
-
-.btn-add-cart:hover {
-  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(34, 197, 94, 0.4);
-  color: #ffffff !important;
-}
-
-.btn-add-cart:active {
-  transform: translateY(0);
 }
 
 /* ========================
@@ -443,8 +578,8 @@ main {
    FOOTER
 ======================== */
 footer {
-  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
-  color: rgba(255, 255, 255, 0.8);
+  background: #1c1c1c;
+  color: rgba(255, 255, 255, 0.7);
   padding: 1.5rem;
   font-size: 0.88rem;
   letter-spacing: 0.02em;
